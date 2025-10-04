@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     prefillUserData();
 });
 
+// ✅ Check login before placing order
 function checkLoginStatus() {
     const currentUser = getCurrentUser();
 
@@ -28,6 +29,7 @@ function getCurrentUser() {
     return userStr ? JSON.parse(userStr) : null;
 }
 
+// ✅ Initialize form steps & buttons
 function initOrderForm() {
     const serviceSelect = document.getElementById('serviceSelect');
     const step1Next = document.getElementById('step1Next');
@@ -71,6 +73,7 @@ function initOrderForm() {
     }
 }
 
+// ✅ Pre-fill name/email from login data
 function prefillUserData() {
     const currentUser = getCurrentUser();
 
@@ -83,6 +86,7 @@ function prefillUserData() {
     }
 }
 
+// ✅ Step Navigation
 function goToStep(step) {
     if (step < 1 || step > totalSteps) return;
 
@@ -115,6 +119,7 @@ function goToStep(step) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ✅ Step Validation
 function validateStep(step) {
     const formStep = document.querySelector(`.form-step[data-step="${step}"]`);
     if (!formStep) return false;
@@ -142,6 +147,7 @@ function validateStep(step) {
     return isValid;
 }
 
+// ✅ Update Review Summary (Step 4)
 function updateReviewSummary() {
     const formData = {
         service: document.getElementById('serviceSelect').value,
@@ -149,7 +155,6 @@ function updateReviewSummary() {
         email: document.getElementById('orderEmail').value,
         phone: document.getElementById('orderPhone').value,
         deadline: document.getElementById('deadline').value,
-        referenceImage: document.getElementById('referenceImage').files[0]?.name || 'No file uploaded',
         designRequirements: document.getElementById('designRequirements').value,
         fabricType: document.getElementById('fabricType').value,
         colorPreference: document.getElementById('colorPreference').value,
@@ -157,12 +162,15 @@ function updateReviewSummary() {
         measurements: document.getElementById('measurements').value || 'Not provided'
     };
 
+    // 🧾 Display review values
     document.getElementById('reviewService').textContent = formData.service;
     document.getElementById('reviewName').textContent = formData.name;
     document.getElementById('reviewEmail').textContent = formData.email;
     document.getElementById('reviewPhone').textContent = formData.phone;
-    document.getElementById('reviewDeadline').textContent = new Date(formData.deadline).toLocaleDateString();
-    document.getElementById('reviewImage').textContent = formData.referenceImage;
+    document.getElementById('reviewDeadline').textContent = formData.deadline
+        ? new Date(formData.deadline).toLocaleDateString()
+        : '-';
+    document.getElementById('reviewImage').textContent = 'No image uploaded';
     document.getElementById('reviewDesign').textContent = formData.designRequirements;
     document.getElementById('reviewFabric').textContent = formData.fabricType;
     document.getElementById('reviewColor').textContent = formData.colorPreference;
@@ -172,46 +180,53 @@ function updateReviewSummary() {
     orderFormData = formData;
 }
 
+// ✅ Handle Final Submit
 async function handleOrderSubmit() {
     const messageDiv = document.getElementById('orderFormMessage');
 
     try {
         await sendCustomOrderToTelegram(orderFormData);
 
-        showOrderMessage(messageDiv, 'Your custom order has been submitted successfully! We will contact you soon.', 'success');
+        showOrderMessage(
+            messageDiv,
+            '✅ Your custom order has been submitted successfully! We will contact you soon.',
+            'success'
+        );
 
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 3000);
 
     } catch (error) {
-        showOrderMessage(messageDiv, 'An error occurred. Please try again.', 'error');
+        showOrderMessage(messageDiv, '⚠️ An error occurred. Please try again.', 'error');
     }
 }
 
+// ✅ Send Data to Telegram Bot
 async function sendCustomOrderToTelegram(formData) {
     const TELEGRAM_BOT_TOKEN = '8251796240:AAGPRIAZH50aUl6Vlmtu1ZKOFmANOiH2lYc';
     const TELEGRAM_CHAT_ID = '5932177382';
 
-    const text = `🧵 *New Custom Order Submission*\n\n` +
-                 `👤 Name: ${formData.name}\n` +
-                 `📧 Email: ${formData.email}\n` +
-                 `📞 Phone: ${formData.phone}\n` +
-                 `🎨 Service: ${formData.service}\n` +
-                 `📅 Deadline: ${formData.deadline}\n\n` +
-                 `📌 *Specifications:*\n` +
-                 `Design: ${formData.designRequirements}\n` +
-                 `Fabric: ${formData.fabricType}\n` +
-                 `Color: ${formData.colorPreference}\n` +
-                 `Style: ${formData.embroideryStyle}\n` +
-                 `Measurements: ${formData.measurements}\n` +
-                 `Reference Image: ${formData.referenceImage}`;
+    const text = `
+🧵 *New Custom Order Submission* 🧵
+
+👤 Name: ${formData.name}
+📧 Email: ${formData.email}
+📞 Phone: ${formData.phone}
+🎨 Service: ${formData.service}
+📅 Deadline: ${formData.deadline}
+
+📌 *Specifications:*
+🧵 Design: ${formData.designRequirements}
+🪡 Fabric: ${formData.fabricType}
+🎨 Color: ${formData.colorPreference}
+💎 Style: ${formData.embroideryStyle}
+📏 Measurements: ${formData.measurements}
+`;
 
     const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
             text: text,
@@ -224,6 +239,7 @@ async function sendCustomOrderToTelegram(formData) {
     }
 }
 
+// ✅ Display Status Message
 function showOrderMessage(element, message, type) {
     if (element) {
         element.textContent = message;
