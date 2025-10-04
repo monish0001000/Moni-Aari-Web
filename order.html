@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order - Moni-Aari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Moni-Aari</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="placeOrderNav" style="display: none;"><a href="order.html" class="active">Place Order</a></li>
+                <li><a href="login.html" id="authLink">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="fade-in">Create Your Custom Order</h1>
+            <p class="fade-in">Share your vision with us and we'll create a beautiful, custom piece tailored specifically to your requirements and preferences.</p>
+        </div>
+    </section>
+
+    <section class="order-section">
+        <div class="container">
+            <div class="order-wrapper fade-in-scroll">
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-circle">1</div>
+                            <div class="step-label">Service Selection</div>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-circle">2</div>
+                            <div class="step-label">Project Details</div>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-circle">3</div>
+                            <div class="step-label">Specifications</div>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-circle">4</div>
+                            <div class="step-label">Review & Submit</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-form-container">
+                    <form id="orderForm">
+                        <div class="form-step active" data-step="1">
+                            <h2>Select Your Service</h2>
+                            <p class="step-description">Choose the embroidery service you're interested in</p>
+
+                            <div class="form-group">
+                                <label for="serviceSelect">Choose a Service *</label>
+                                <select id="serviceSelect" name="service" required>
+                                    <option value="">-- Select a Service --</option>
+                                    <option value="Aari Bridal Blouse - ₹15,000">Aari Bridal Blouse - ₹15,000</option>
+                                    <option value="Custom Embroidery Patch - ₹2,000">Custom Embroidery Patch - ₹2,000</option>
+                                    <option value="Saree Border Work - ₹5,000">Saree Border Work - ₹5,000</option>
+                                    <option value="Dupatta Embroidery - ₹3,000">Dupatta Embroidery - ₹3,000</option>
+                                    <option value="Kurti Neck Design - ₹1,500">Kurti Neck Design - ₹1,500</option>
+                                    <option value="Kids Embroidery Wear - ₹2,500">Kids Embroidery Wear - ₹2,500</option>
+                                    <option value="Logo / Monogram Embroidery - ₹4,000">Logo / Monogram Embroidery - ₹4,000</option>
+                                    <option value="Handcrafted Zardosi Work - ₹8,000">Handcrafted Zardosi Work - ₹8,000</option>
+                                    <option value="Lehenga Embellishment - ₹20,000">Lehenga Embellishment - ₹20,000</option>
+                                    <option value="Cushion Cover Embroidery - ₹1,200">Cushion Cover Embroidery - ₹1,200</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-primary" id="step1Next" disabled>Next Step</button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="2">
+                            <h2>Project Details</h2>
+                            <p class="step-description">Tell us about your project requirements</p>
+
+                            <div class="form-group">
+                                <label for="orderName">Name *</label>
+                                <input type="text" id="orderName" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="orderEmail">Email *</label>
+                                <input type="email" id="orderEmail" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="orderPhone">Phone *</label>
+                                <input type="tel" id="orderPhone" name="phone" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="deadline">Delivery Deadline *</label>
+                                <input type="date" id="deadline" name="deadline" required>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-prev-step>Previous</button>
+                                <button type="button" class="btn btn-primary" data-next-step>Next Step</button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="3">
+                            <h2>Specifications</h2>
+                            <p class="step-description">Provide detailed specifications for your custom piece</p>
+
+                            <div class="form-group">
+                                <label for="designRequirements">Describe Your Design Requirements *</label>
+                                <textarea id="designRequirements" name="designRequirements" rows="4" required placeholder="Tell us about the design you envision..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fabricType">Fabric Type *</label>
+                                <select id="fabricType" name="fabricType" required>
+                                    <option value="">-- Select Fabric --</option>
+                                    <option value="Silk">Silk</option>
+                                    <option value="Cotton">Cotton</option>
+                                    <option value="Net">Net</option>
+                                    <option value="Velvet">Velvet</option>
+                                    <option value="Georgette">Georgette</option>
+                                    <option value="Chiffon">Chiffon</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="colorPreference">Color Preference *</label>
+                                <input type="text" id="colorPreference" name="colorPreference" required placeholder="e.g., Gold, Red, Multi-color">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="embroideryStyle">Embroidery Style *</label>
+                                <select id="embroideryStyle" name="embroideryStyle" required>
+                                    <option value="">-- Select Style --</option>
+                                    <option value="Zardosi">Zardosi</option>
+                                    <option value="Aari">Aari</option>
+                                    <option value="Beadwork">Beadwork</option>
+                                    <option value="Sequin">Sequin</option>
+                                    <option value="Mirror Work">Mirror Work</option>
+                                    <option value="Thread Embroidery">Thread Embroidery</option>
+                                    <option value="Mixed">Mixed</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="measurements">Size / Measurement Notes</label>
+                                <textarea id="measurements" name="measurements" rows="3" placeholder="Provide any size or measurement details..."></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-prev-step>Previous</button>
+                                <button type="button" class="btn btn-primary" data-next-step>Next Step</button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="4">
+                            <h2>Review & Submit</h2>
+                            <p class="step-description">Please review your order details before submitting</p>
+
+                            <div class="review-summary">
+                                <div class="review-section">
+                                    <h3>Service Details</h3>
+                                    <div class="review-item">
+                                        <span class="review-label">Selected Service:</span>
+                                        <span class="review-value" id="reviewService">-</span>
+                                    </div>
+                                </div>
+
+                                <div class="review-section">
+                                    <h3>Contact Information</h3>
+                                    <div class="review-item">
+                                        <span class="review-label">Name:</span>
+                                        <span class="review-value" id="reviewName">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Email:</span>
+                                        <span class="review-value" id="reviewEmail">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Phone:</span>
+                                        <span class="review-value" id="reviewPhone">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Deadline:</span>
+                                        <span class="review-value" id="reviewDeadline">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Reference Image:</span>
+                                        <span class="review-value" id="reviewImage">-</span>
+                                    </div>
+                                </div>
+
+                                <div class="review-section">
+                                    <h3>Specifications</h3>
+                                    <div class="review-item">
+                                        <span class="review-label">Design Requirements:</span>
+                                        <span class="review-value" id="reviewDesign">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Fabric Type:</span>
+                                        <span class="review-value" id="reviewFabric">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Color Preference:</span>
+                                        <span class="review-value" id="reviewColor">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Embroidery Style:</span>
+                                        <span class="review-value" id="reviewStyle">-</span>
+                                    </div>
+                                    <div class="review-item">
+                                        <span class="review-label">Measurements:</span>
+                                        <span class="review-value" id="reviewMeasurements">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="orderFormMessage" class="form-message"></div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-prev-step>Previous</button>
+                                <button type="submit" class="btn btn-primary">Confirm & Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Moni-Aari</h3>
+                    <p>Traditional Aari Work & Custom Embroidery Since 2000</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: sabarigiri0911@gmail.com</p>
+                    <p>Phone: +91 6380499419</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Moni-Aari. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/order.js"></script>
+</body>
+</html>
